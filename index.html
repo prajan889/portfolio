@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Private Journal</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      background-color: #f5f5f5;
+    }
+    h1 { color: #333; }
+    textarea {
+      width: 100%;
+      height: 300px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Journal</h1>
+  <textarea id="entry" placeholder="Write your thoughts here..."></textarea><br>
+  <button onclick="saveEntry()">💾 Save</button>
+
+  <script>
+    // Password protection
+    const password = prompt("Enter password:");
+    if (password !== "secret123") {
+      document.body.innerHTML = "<h2>Access Denied</h2>";
+    } else {
+      // Load saved content
+      const saved = localStorage.getItem("journalEntry");
+      if (saved) {
+        document.getElementById("entry").value = saved;
+      }
+
+      // Save on button click
+      function saveEntry() {
+        const content = document.getElementById("entry").value;
+        localStorage.setItem("journalEntry", content);
+        alert("Entry saved!");
+      }
+    }
+  </script>
+</body>
+</html>
